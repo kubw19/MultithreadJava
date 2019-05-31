@@ -47,7 +47,7 @@ public class AirplanePositioner extends Thread {
             try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
             airplane.position.x+=direction;
             airplane.position.y = (int)(airplane.runway.m * airplane.position.x + airplane.runway.c);
-            //airplane.airport.repaint();
+            airplane.airport.repaint();
         }
         Airport airport = airplane.airport;
         airplane.airport.airplanes.remove(airplane);
