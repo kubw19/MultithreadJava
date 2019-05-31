@@ -73,8 +73,12 @@ public class AirplanePositioner extends Thread {
         airplane.airport.wybieranie[airplane.id] = false;
 
         for(int i = 0;i<airplane.airport.numerek.length;i++){
-            while(airplane.airport.wybieranie[i]);
-            while(airplane.airport.numerek[i] != 0 && (airplane.airport.numerek[airplane.id] > airplane.airport.numerek[i] || (airplane.airport.numerek[airplane.id] == airplane.airport.numerek[i] && airplane.id > i)));
+            while(airplane.airport.wybieranie[i]){
+                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+            }
+            while(airplane.airport.numerek[i] != 0 && (airplane.airport.numerek[airplane.id] > airplane.airport.numerek[i] || (airplane.airport.numerek[airplane.id] == airplane.airport.numerek[i] && airplane.id > i))){
+                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+            }
         }
 
         useRunway();

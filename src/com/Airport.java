@@ -18,7 +18,7 @@ public class Airport extends JPanel implements KeyListener {
 
     public Random random;
 
-    public int airplaneAmount = 10;
+    public int airplaneAmount = 50;
 
     public volatile boolean wybieranie[];
     public volatile int numerek[];
