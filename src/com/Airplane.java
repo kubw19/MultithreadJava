@@ -8,7 +8,7 @@ public class Airplane {
     public Point position = new Point();
 
     public Airport airport;
-    private AirplanePositioner airplanePositioner;
+    public AirplanePositioner airplanePositioner;
     public Runway runway;
     private int height = 30;
     private int width = 30;
@@ -27,7 +27,7 @@ public class Airplane {
             this.position = new Point(runway.finalApproach);
         }
         else if(state == "departure"){
-            this.position = new Point(runway.runwayStart);
+            this.position = new Point(runway.departureTaxiwayPath.get(0));
         }
         this.airport = airport;
         this.airplanePositioner = new AirplanePositioner(this);
@@ -39,7 +39,7 @@ public class Airplane {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(position.x + airport.width / 2 - width / 2, -1 * position.y + airport.height / 2 - height / 2, 20, 20);
 
-        //System.out.println(id + position.toString());
+        System.out.println(id + position.toString());
 
     }
 

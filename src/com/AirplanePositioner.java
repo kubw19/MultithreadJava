@@ -10,6 +10,19 @@ public class AirplanePositioner extends Thread {
 
     private Random random;
 
+    private void moveTo(Point to){
+        Point from = new Point(airplane.position);
+
+        int distance = (int)to.distance(from);
+        distance /= 20;
+
+        while(!airplane.position.equals(to)) {
+            try {sleep(100 / ((long)distance + 1));} catch (InterruptedException e) {e.printStackTrace();}
+            Positioner.moveTo(airplane.position, from, to);
+            airplane.airport.repaint();
+        }
+    }
+
     public AirplanePositioner(Airplane airplane){
         random = new Random();
         this.airplane = airplane;
@@ -43,14 +56,28 @@ public class AirplanePositioner extends Thread {
 
     private void useRunway(){
         airplane.active = true;
+
+        if(airplane.state == "departure")
+            for(Point next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())){
+                moveTo(new Point(next));
+            }
+
        while(!pathEnd()){
-            try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+            try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
             airplane.position.x+=direction;
             airplane.position.y = (int)(airplane.runway.m * airplane.position.x + airplane.runway.c);
             airplane.airport.repaint();
         }
+
+       if(airplane.state == "approach")
+        for(Point next : airplane.runway.approachTaxiwayPath){
+            moveTo(new Point(next));
+        }
+
         Airport airport = airplane.airport;
         airplane.airport.airplanes.remove(airplane);
+        if(airplane.state == "departure")airport.ileStartuje--;
+        else airport.ileLaduje--;
         airport.repaint();
     }
 

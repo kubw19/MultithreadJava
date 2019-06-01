@@ -1,6 +1,7 @@
 package com;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Runway {
     public String number;
@@ -8,6 +9,9 @@ public class Runway {
     public Point runwayExit;
     public Point runwayStart;
     public Point airbornePoint;
+
+    public ArrayList<Point> approachTaxiwayPath = new ArrayList<>();
+    public ArrayList<Point> departureTaxiwayPath = new ArrayList<>();
 
 
     public float m;
