@@ -93,7 +93,23 @@ public class AirplanePositioner extends Thread {
 
     public void run() {
 
-        int[] numerek = airplane.airport.numerek;
+        try {
+            sleep(random.nextInt(60000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(airplane.state == "departure") {
+            try {airplane.airport.addTakeoff.acquire();} catch (InterruptedException e) {e.printStackTrace();}
+            airplane.airport.ileStartuje++;
+            airplane.airport.addTakeoff.release();
+        }
+
+        else{
+            try {airplane.airport.addLanding.acquire();} catch (InterruptedException e) {e.printStackTrace();}
+            airplane.airport.ileLaduje++;
+            airplane.airport.addLanding.release();
+        }
 
         airplane.airport.wybieranie[airplane.id] = true;
         airplane.airport.numerek[airplane.id] = max() + 1;

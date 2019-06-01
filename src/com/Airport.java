@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 
 public class Airport extends JPanel implements KeyListener {
 
@@ -33,6 +34,9 @@ public class Airport extends JPanel implements KeyListener {
 
     public int ileLaduje = 0;
     public int ileStartuje = 0;
+
+    public Semaphore addLanding = new Semaphore(1);
+    public Semaphore addTakeoff = new Semaphore(1);
 
     public Airport(){
         wybieranie = new boolean[airplaneAmount];
@@ -159,8 +163,7 @@ public class Airport extends JPanel implements KeyListener {
         for(int i = 0; i< airplaneAmount; i++) {
             String state = states[random.nextInt(100)%2];
             airplanes.add(new Airplane(i,this, runways.get(random.nextInt(100)%4), state));
-            if(state == "departure")ileStartuje++;
-            else ileLaduje++;
+
         }
 
     }
