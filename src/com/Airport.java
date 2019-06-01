@@ -19,7 +19,7 @@ public class Airport extends JPanel implements KeyListener {
 
     public Random random;
 
-    public int airplaneAmount = 50;
+    public final int airplaneAmount = 100;
 
     public volatile boolean wybieranie[];
     public volatile int numerek[];
@@ -34,9 +34,12 @@ public class Airport extends JPanel implements KeyListener {
 
     public int ileLaduje = 0;
     public int ileStartuje = 0;
+    public int ileObsluzonych = 0;
+    public int ileDoObsluzenia = airplaneAmount;
 
     public Semaphore addLanding = new Semaphore(1);
     public Semaphore addTakeoff = new Semaphore(1);
+    public Semaphore changeToManage = new Semaphore(1);
 
     public Airport(){
         wybieranie = new boolean[airplaneAmount];
@@ -64,7 +67,7 @@ public class Airport extends JPanel implements KeyListener {
         runway.departureTaxiwayPath.add(new Point(-142, 305));
         runway.departureTaxiwayPath.add(new Point(-198, 163));
         runway.departureTaxiwayPath.add(new Point(-353, 225));
-        runway.departureTaxiwayPath.add(new Point(-373, 175));
+        runway.departureTaxiwayPath.add(new Point(-365, 193));
 
         runway.approachTaxiwayPath.add(new Point(482, -128));
         runway.approachTaxiwayPath.add(new Point(-198, 163));
@@ -100,7 +103,7 @@ public class Airport extends JPanel implements KeyListener {
         runway.departureTaxiwayPath.add(new Point(45, 75));
         runway.departureTaxiwayPath.add(new Point(231, 115));
         runway.departureTaxiwayPath.add(new Point(296, 97));
-        runway.departureTaxiwayPath.add(new Point(299, 85));
+        runway.departureTaxiwayPath.add(new Point(294, 101));
 
 
 
@@ -122,7 +125,7 @@ public class Airport extends JPanel implements KeyListener {
         runway.departureTaxiwayPath.add(new Point(-142, 305));
         runway.departureTaxiwayPath.add(new Point(-198, 163));
         runway.departureTaxiwayPath.add(new Point(482, -128));
-        runway.departureTaxiwayPath.add(new Point(463, -191));
+        runway.departureTaxiwayPath.add(new Point(468, -170));
 
         runway.approachTaxiwayPath.add(new Point(-198, 163));
         runway.approachTaxiwayPath.add(new Point(-142, 305));
@@ -155,7 +158,7 @@ public class Airport extends JPanel implements KeyListener {
         runway.departureTaxiwayPath.add(new Point(-261, 186));
         runway.departureTaxiwayPath.add(new Point(-210, -84));
         runway.departureTaxiwayPath.add(new Point(-359, -124));
-        runway.departureTaxiwayPath.add(new Point(-371, -76));
+        runway.departureTaxiwayPath.add(new Point(-366, -94));
 
         runways.add(runway);
 
@@ -175,8 +178,11 @@ public class Airport extends JPanel implements KeyListener {
             airplane.draw(graphics);
         }
 
-        graphics.drawString("Lądujących: " + ileLaduje, 0,50);
-        graphics.drawString("Startujacych: " + ileStartuje, 0,100);
+        graphics.drawString("Do obslugi: " + ileDoObsluzenia, 0,10);
+        graphics.drawString("Obsluzonych: " + ileObsluzonych, 0,30);
+        graphics.drawString("Obslugiwanych: " + (ileLaduje + ileStartuje), 0,50);
+        graphics.drawString("Lądujących: " + ileLaduje, 0,90);
+        graphics.drawString("Startujacych: " + ileStartuje, 0,110);
     }
 
     @Override

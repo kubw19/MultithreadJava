@@ -55,12 +55,18 @@ public class AirplanePositioner extends Thread {
     }
 
     private void useRunway(){
-        airplane.active = true;
+        airplane.airport.wybieranie[airplane.id] = true;
+        airplane.airport.numerek[airplane.id] = max() + 1;
+        airplane.airport.wybieranie[airplane.id] = false;
 
-        if(airplane.state == "departure")
-            for(Point next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())){
-                moveTo(new Point(next));
+        for(int i = 0;i<airplane.airport.numerek.length;i++){
+            while(airplane.airport.wybieranie[i]){
+                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
             }
+            while(airplane.airport.numerek[i] != 0 && (airplane.airport.numerek[airplane.id] > airplane.airport.numerek[i] || (airplane.airport.numerek[airplane.id] == airplane.airport.numerek[i] && airplane.id > i))){
+                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+            }
+        }
 
        while(!pathEnd()){
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
@@ -69,16 +75,8 @@ public class AirplanePositioner extends Thread {
             airplane.airport.repaint();
         }
 
-       if(airplane.state == "approach")
-        for(Point next : airplane.runway.approachTaxiwayPath){
-            moveTo(new Point(next));
-        }
+        airplane.airport.numerek[airplane.id] = 0;
 
-        Airport airport = airplane.airport;
-        airplane.airport.airplanes.remove(airplane);
-        if(airplane.state == "departure")airport.ileStartuje--;
-        else airport.ileLaduje--;
-        airport.repaint();
     }
 
 
@@ -99,6 +97,10 @@ public class AirplanePositioner extends Thread {
             e.printStackTrace();
         }
 
+        try {airplane.airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
+        airplane.airport.ileDoObsluzenia--;
+        airplane.airport.changeToManage.release();
+
         if(airplane.state == "departure") {
             try {airplane.airport.addTakeoff.acquire();} catch (InterruptedException e) {e.printStackTrace();}
             airplane.airport.ileStartuje++;
@@ -111,22 +113,32 @@ public class AirplanePositioner extends Thread {
             airplane.airport.addLanding.release();
         }
 
-        airplane.airport.wybieranie[airplane.id] = true;
-        airplane.airport.numerek[airplane.id] = max() + 1;
-        airplane.airport.wybieranie[airplane.id] = false;
 
-        for(int i = 0;i<airplane.airport.numerek.length;i++){
-            while(airplane.airport.wybieranie[i]){
-                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+        airplane.active = true;
+
+        if(airplane.state == "departure")
+            for(Point next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())){
+                moveTo(new Point(next));
             }
-            while(airplane.airport.numerek[i] != 0 && (airplane.airport.numerek[airplane.id] > airplane.airport.numerek[i] || (airplane.airport.numerek[airplane.id] == airplane.airport.numerek[i] && airplane.id > i))){
-                try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
-            }
-        }
+
+
 
         useRunway();
 
-        airplane.airport.numerek[airplane.id] = 0;
+
+        if(airplane.state == "approach")
+            for(Point next : airplane.runway.approachTaxiwayPath){
+                moveTo(new Point(next));
+            }
+
+        Airport airport = airplane.airport;
+        airplane.airport.airplanes.remove(airplane);
+        if(airplane.state == "departure")airport.ileStartuje--;
+        else airport.ileLaduje--;
+        try {airplane.airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
+        airplane.airport.ileObsluzonych++;
+        airplane.airport.changeToManage.release();
+        airport.repaint();
 
     }
 }
