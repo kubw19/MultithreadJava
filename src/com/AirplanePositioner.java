@@ -23,6 +23,14 @@ public class AirplanePositioner extends Thread {
         }
     }
 
+    public int max(){
+        int maximum = airplane.airport.numerek[0];
+        for(int j = 0; j<airplane.airport.numerek.length;j++){
+            if(airplane.airport.numerek[j] > maximum)maximum = airplane.airport.numerek[j];
+        }
+        return  maximum;
+    }
+
     public AirplanePositioner(Airplane airplane){
         random = new Random();
         this.airplane = airplane;
@@ -67,28 +75,20 @@ public class AirplanePositioner extends Thread {
                 try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
             }
         }
+
+        System.out.println("używa: "+airplane.state + airplane.runway.number);
     }
 
     void unlockRunways(){
         airplane.airport.numerek[airplane.id] = 0;
     }
 
-    public void lockTaxiway(){
-        System.out.println("Blokuje " + airplane.state);
-        try {
-            airplane.airport.taxiwayInUse.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-    void unlockTaxiway(){
-        System.out.println("Odblokuje " + airplane.state);
-        airplane.airport.taxiwayInUse.release();
-    }
 
     private void useRunway(){
 
-        lockRunways();
+        if(airplane.runway.number == "11" && airplane.state == "departure"){}
+        else lockRunways();
+
 
        while(!pathEnd()){
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
@@ -97,18 +97,16 @@ public class AirplanePositioner extends Thread {
             airplane.airport.repaint();
         }
 
-        unlockRunways();
+
+
+        if(airplane.state == "approach" && airplane.runway.number == "29"){}
+        else unlockRunways();
+
 
     }
 
 
-    public int max(){
-        int maximum = airplane.airport.numerek[0];
-        for(int j = 0; j<airplane.airport.numerek.length;j++){
-            if(airplane.airport.numerek[j] > maximum)maximum = airplane.airport.numerek[j];
-        }
-        return  maximum;
-    }
+
 
 
     public void run() {
@@ -141,13 +139,11 @@ public class AirplanePositioner extends Thread {
                   if (next.blockRunways) {
                     lockRunways();
                     moveTo(new Point(next.point));
-                    unlockRunways();
+                    if(airplane.runway.number != "11")unlockRunways();
                 } else moveTo(new Point(next.point));
-                 if(next.blockTaxiway)lockTaxiway();
             }
-            try {sleep(random.nextInt(10000));} catch (InterruptedException e) {e.printStackTrace(); }//opóźnienie wjazdu na pas
+            //try {sleep(random.nextInt(10000));} catch (InterruptedException e) {e.printStackTrace(); }//opóźnienie wjazdu na pas
         }
-        else if(airplane.runway.number == "29")lockTaxiway();
 
         useRunway();
 
@@ -155,16 +151,15 @@ public class AirplanePositioner extends Thread {
         if(airplane.state == "approach") {
             for (TaxiwayPoint next : airplane.runway.approachTaxiwayPath) {
                 if (next.blockRunways) {
-                    lockRunways();
+                    if(airplane.runway.number != "29")lockRunways();
                     moveTo(new Point(next.point));
                     unlockRunways();
                 } else moveTo(new Point(next.point));
-                if(next.blockTaxiway){
-                    if(airplane.runway.number == "29")unlockTaxiway();
-                }
+
+
             }
         }
-        else if(airplane.runway.number == "11")unlockTaxiway();
+
 
         Airport airport = airplane.airport;
         airplane.airport.airplanes.remove(airplane);

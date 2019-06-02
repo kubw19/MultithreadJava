@@ -104,7 +104,7 @@ public class Airport extends JPanel implements KeyListener {
         runway.addApproachTaxiwayPoint(new Point(-210, -84));
         runway.addApproachTaxiwayPoint(new Point(-213, -58));
         runway.addApproachTaxiwayPoint(new Point(-253, 146), true);
-        runway.addApproachTaxiwayPoint(new Point(-261, 186), false, true);
+        runway.addApproachTaxiwayPoint(new Point(-261, 186));
         runway.addApproachTaxiwayPoint(new Point(-198, 163));
         runway.addApproachTaxiwayPoint(new Point(-142, 305));
 
@@ -173,10 +173,10 @@ public class Airport extends JPanel implements KeyListener {
         runway.addDepartureTaxiwayPoint(new Point(-142, 305));
         runway.addDepartureTaxiwayPoint(new Point(-198, 163));
         runway.addDepartureTaxiwayPoint(new Point(-227, 171));
-        runway.addDepartureTaxiwayPoint(new Point(-239, 159), false, true);
-        runway.addDepartureTaxiwayPoint(new Point(-253, 149));
-        runway.addDepartureTaxiwayPoint(new Point(-253, 146));
-        runway.addDepartureTaxiwayPoint(new Point(-210, -84), true);
+        runway.addDepartureTaxiwayPoint(new Point(-239, 159));
+        runway.addDepartureTaxiwayPoint(new Point(-253, 149), true);
+        //runway.addDepartureTaxiwayPoint(new Point(-253, 146));
+        runway.addDepartureTaxiwayPoint(new Point(-210, -84));
         runway.addDepartureTaxiwayPoint(new Point(-359, -124));
         runway.addDepartureTaxiwayPoint(new Point(-366, -94));
 
