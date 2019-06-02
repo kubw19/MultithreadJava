@@ -54,7 +54,7 @@ public class AirplanePositioner extends Thread {
         return false;
     }
 
-    private void useRunway(){
+    void lockRunways(){
         airplane.airport.wybieranie[airplane.id] = true;
         airplane.airport.numerek[airplane.id] = max() + 1;
         airplane.airport.wybieranie[airplane.id] = false;
@@ -67,6 +67,15 @@ public class AirplanePositioner extends Thread {
                 try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
             }
         }
+    }
+
+    void unlockRunways(){
+        airplane.airport.numerek[airplane.id] = 0;
+    }
+
+    private void useRunway(){
+
+        lockRunways();
 
        while(!pathEnd()){
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
@@ -75,7 +84,7 @@ public class AirplanePositioner extends Thread {
             airplane.airport.repaint();
         }
 
-        airplane.airport.numerek[airplane.id] = 0;
+        unlockRunways();
 
     }
 
@@ -117,8 +126,13 @@ public class AirplanePositioner extends Thread {
         airplane.active = true;
 
         if(airplane.state == "departure")
-            for(Point next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())){
-                moveTo(new Point(next));
+            for(TaxiwayPoint next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())){
+                if(next.blockRunways) {
+                    lockRunways();
+                    moveTo(new Point(next.point));
+                    unlockRunways();
+                }
+                else moveTo(new Point(next.point));
             }
 
 
@@ -127,8 +141,13 @@ public class AirplanePositioner extends Thread {
 
 
         if(airplane.state == "approach")
-            for(Point next : airplane.runway.approachTaxiwayPath){
-                moveTo(new Point(next));
+            for(TaxiwayPoint next : airplane.runway.approachTaxiwayPath){
+                if(next.blockRunways) {
+                    lockRunways();
+                    moveTo(new Point(next.point));
+                    unlockRunways();
+                }
+                else moveTo(new Point(next.point));
             }
 
         Airport airport = airplane.airport;

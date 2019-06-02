@@ -10,8 +10,31 @@ public class Runway {
     public Point runwayStart;
     public Point airbornePoint;
 
-    public ArrayList<Point> approachTaxiwayPath = new ArrayList<>();
-    public ArrayList<Point> departureTaxiwayPath = new ArrayList<>();
+    public ArrayList<TaxiwayPoint> approachTaxiwayPath = new ArrayList<>();
+
+    public ArrayList<TaxiwayPoint> departureTaxiwayPath = new ArrayList<>();
+
+    public void addApproachTaxiwayPoint(Point point){
+        approachTaxiwayPath.add(new TaxiwayPoint(point));
+    }
+
+    public void addApproachTaxiwayPoint(Point point, boolean useRunways){
+        if(useRunways)
+            approachTaxiwayPath.add(new TaxiwayPoint(point, true));
+        else
+            approachTaxiwayPath.add(new TaxiwayPoint(point));
+    }
+
+    public void addDepartureTaxiwayPoint(Point point){
+        departureTaxiwayPath.add(new TaxiwayPoint(point));
+    }
+
+    public void addDepartureTaxiwayPoint(Point point, boolean useRunways){
+        if(useRunways)
+            departureTaxiwayPath.add(new TaxiwayPoint(point, true));
+        else
+            departureTaxiwayPath.add(new TaxiwayPoint(point));
+    }
 
 
     public float m;

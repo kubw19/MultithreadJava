@@ -31,7 +31,7 @@ public class Airplane {
             color = Color.RED;
         }
         else if(state == "departure"){
-            this.position = new Point(runway.departureTaxiwayPath.get(0));
+            this.position = new Point(runway.departureTaxiwayPath.get(0).point);
             color = Color.GREEN;
         }
         this.airport = airport;
