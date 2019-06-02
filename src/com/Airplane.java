@@ -44,7 +44,7 @@ public class Airplane {
         graphics.setColor(this.color);
         graphics.fillRect(position.x + airport.width / 2 - width / 2, -1 * position.y + airport.height / 2 - height / 2, 20, 20);
         graphics.setColor(Color.BLACK);
-        System.out.println(id + position.toString());
+        //System.out.println(id + position.toString());
 
     }
 

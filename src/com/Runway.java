@@ -25,6 +25,10 @@ public class Runway {
             approachTaxiwayPath.add(new TaxiwayPoint(point));
     }
 
+    public void addApproachTaxiwayPoint(Point point, boolean useRunways, boolean blockTaxiway){
+            approachTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
+    }
+
     public void addDepartureTaxiwayPoint(Point point){
         departureTaxiwayPath.add(new TaxiwayPoint(point));
     }
@@ -35,7 +39,9 @@ public class Runway {
         else
             departureTaxiwayPath.add(new TaxiwayPoint(point));
     }
-
+    public void addDepartureTaxiwayPoint(Point point, boolean useRunways, boolean blockTaxiway){
+        departureTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
+    }
 
     public float m;
     public float c;

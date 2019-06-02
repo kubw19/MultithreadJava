@@ -30,7 +30,7 @@ public class Airport extends JPanel implements KeyListener {
 
     private ArrayList<Runway> runways = new ArrayList<>();
 
-    public String[] states = {"departure", "approach"};
+    public String[] states = {"approach", "departure"};
 
     public int ileLaduje = 0;
     public int ileStartuje = 0;
@@ -40,10 +40,15 @@ public class Airport extends JPanel implements KeyListener {
     public Semaphore addLanding = new Semaphore(1);
     public Semaphore addTakeoff = new Semaphore(1);
     public Semaphore changeToManage = new Semaphore(1);
+    public Semaphore taxiwayInUse = new Semaphore(1);
+
+
 
     public Airport(){
         wybieranie = new boolean[airplaneAmount];
         numerek = new int[airplaneAmount];
+
+
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -69,7 +74,12 @@ public class Airport extends JPanel implements KeyListener {
         runway.addDepartureTaxiwayPoint(new Point(-353, 225));
         runway.addDepartureTaxiwayPoint(new Point(-365, 193));
 
-        runway.addApproachTaxiwayPoint(new Point(482, -128));
+        runway.addApproachTaxiwayPoint(new Point(445, -240));
+        runway.addApproachTaxiwayPoint(new Point(290, -174));
+        runway.addApproachTaxiwayPoint(new Point(299, -146));
+        runway.addApproachTaxiwayPoint(new Point(322, -92), true);
+        runway.addApproachTaxiwayPoint(new Point(305, -72));
+        runway.addApproachTaxiwayPoint(new Point(286, -44));
         runway.addApproachTaxiwayPoint(new Point(130, 21));
         runway.addApproachTaxiwayPoint(new Point(-198, 163), true);
         runway.addApproachTaxiwayPoint(new Point(-142, 305));
@@ -93,7 +103,8 @@ public class Airport extends JPanel implements KeyListener {
         runway.addApproachTaxiwayPoint(new Point(-359, -124));
         runway.addApproachTaxiwayPoint(new Point(-210, -84));
         runway.addApproachTaxiwayPoint(new Point(-213, -58));
-        runway.addApproachTaxiwayPoint(new Point(-261, 186), true);
+        runway.addApproachTaxiwayPoint(new Point(-253, 146), true);
+        runway.addApproachTaxiwayPoint(new Point(-261, 186), false, true);
         runway.addApproachTaxiwayPoint(new Point(-198, 163));
         runway.addApproachTaxiwayPoint(new Point(-142, 305));
 
@@ -125,9 +136,16 @@ public class Airport extends JPanel implements KeyListener {
         runway.setC(11.47158f);
 
         runway.addDepartureTaxiwayPoint(new Point(-142, 305));
-        runway.addDepartureTaxiwayPoint(new Point(-198, 163));
-        runway.addDepartureTaxiwayPoint(new Point(59, 50));
-        runway.addDepartureTaxiwayPoint(new Point(482, -128), true);
+        runway.addDepartureTaxiwayPoint(new Point(-183, 195));
+        runway.addDepartureTaxiwayPoint(new Point(-19, 128));
+        runway.addDepartureTaxiwayPoint(new Point(-5, 128));
+        runway.addDepartureTaxiwayPoint(new Point(29, 112));
+        runway.addDepartureTaxiwayPoint(new Point(45, 75));
+        runway.addDepartureTaxiwayPoint(new Point(231, 115));
+        runway.addDepartureTaxiwayPoint(new Point(296, 97));
+        runway.addDepartureTaxiwayPoint(new Point(332, -32));
+        runway.addDepartureTaxiwayPoint(new Point(337, -67));
+        runway.addDepartureTaxiwayPoint(new Point(482, -128));
         runway.addDepartureTaxiwayPoint(new Point(468, -170));
 
         runway.addApproachTaxiwayPoint(new Point(-198, 163));
@@ -139,7 +157,7 @@ public class Airport extends JPanel implements KeyListener {
         //Runway 11
         runway = new Runway("11");
         runway.setFinalApproach(new Point(-576,-126));
-        runway.setRunwayExit(new Point(299, 85));
+        runway.setRunwayExit(new Point(52, 26));
 
         runway.setRunwayStart(new Point(-412,120));
         runway.setAirbornePoint(new Point(576, 153));
@@ -147,18 +165,16 @@ public class Airport extends JPanel implements KeyListener {
         runway.setM(0.2425532f);
         runway.setC(13.44681f);
 
-        runway.addApproachTaxiwayPoint(new Point(296, 97));
-        runway.addApproachTaxiwayPoint(new Point(231, 115));
-        runway.addApproachTaxiwayPoint(new Point(45, 75));
-        runway.addApproachTaxiwayPoint(new Point(29, 112));
-        runway.addApproachTaxiwayPoint(new Point(-5, 125));
-        runway.addApproachTaxiwayPoint(new Point(-19, 128));
-        runway.addApproachTaxiwayPoint(new Point(-183, 195));
+        runway.addApproachTaxiwayPoint(new Point(64, 50));
+        runway.addApproachTaxiwayPoint(new Point(59, 50));
+        runway.addApproachTaxiwayPoint(new Point(-198, 163));
         runway.addApproachTaxiwayPoint(new Point(-142, 305));
 
         runway.addDepartureTaxiwayPoint(new Point(-142, 305));
         runway.addDepartureTaxiwayPoint(new Point(-198, 163));
-        runway.addDepartureTaxiwayPoint(new Point(-261, 186));
+        runway.addDepartureTaxiwayPoint(new Point(-227, 171));
+        runway.addDepartureTaxiwayPoint(new Point(-239, 159), false, true);
+        runway.addDepartureTaxiwayPoint(new Point(-253, 149));
         runway.addDepartureTaxiwayPoint(new Point(-253, 146));
         runway.addDepartureTaxiwayPoint(new Point(-210, -84), true);
         runway.addDepartureTaxiwayPoint(new Point(-359, -124));
@@ -169,7 +185,7 @@ public class Airport extends JPanel implements KeyListener {
 
         for(int i = 0; i< airplaneAmount; i++) {
             String state = states[random.nextInt(100)%2];
-            airplanes.add(new Airplane(i,this, runways.get(random.nextInt(100)%4), state));
+            airplanes.add(new Airplane(i,this, runways.get(random.nextInt(1000)%4), state));
 
         }
 
