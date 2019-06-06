@@ -19,7 +19,7 @@ public class Airport extends JPanel implements KeyListener {
 
     public Random random;
 
-    public final int airplaneAmount = 100;
+    public int airplaneAmount = 0;
 
     public volatile boolean wybieranie[];
     public volatile int numerek[];
@@ -35,7 +35,7 @@ public class Airport extends JPanel implements KeyListener {
     public int ileLaduje = 0;
     public int ileStartuje = 0;
     public int ileObsluzonych = 0;
-    public int ileDoObsluzenia = airplaneAmount;
+    public int ileDoObsluzenia = 0;
 
     public Semaphore addLanding = new Semaphore(1);
     public Semaphore addTakeoff = new Semaphore(1);
@@ -45,8 +45,6 @@ public class Airport extends JPanel implements KeyListener {
 
 
     public Airport(){
-        wybieranie = new boolean[airplaneAmount];
-        numerek = new int[airplaneAmount];
 
 
         addKeyListener(this);
@@ -183,12 +181,32 @@ public class Airport extends JPanel implements KeyListener {
         runways.add(runway);
 
 
-        for(int i = 0; i< airplaneAmount; i++) {
-            String state = states[random.nextInt(100)%2];
-            airplanes.add(new Airplane(i,this, runways.get(random.nextInt(1000)%4), state));
 
+    }
+
+    public void addAirplanes(int airplaneAmountDep, int airplaneAmountArr){
+        airplanes = new ArrayList<>();
+        this.airplaneAmount = airplaneAmountArr + airplaneAmountDep;
+        wybieranie = new boolean[airplaneAmount];
+        numerek = new int[airplaneAmount];
+        ileDoObsluzenia = airplaneAmount;
+
+        addLanding = new Semaphore(1);
+        addTakeoff = new Semaphore(1);
+        changeToManage = new Semaphore(1);
+
+
+        for(int i = 0; i< airplaneAmountArr; i++) {
+            airplanes.add(new Airplane(i,this, runways.get(random.nextInt(1000)%4), "approach"));
+        }
+        for(int i = 0; i< airplaneAmountDep; i++) {
+            airplanes.add(new Airplane(i,this, runways.get(random.nextInt(1000)%4), "departure"));
         }
 
+
+
+
+        repaint();
     }
 
     public void paint(Graphics graphics){
