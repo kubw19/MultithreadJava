@@ -2,6 +2,7 @@ package com;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 public class Runway {
     public String number;
@@ -9,6 +10,12 @@ public class Runway {
     public Point runwayExit;
     public Point runwayStart;
     public Point airbornePoint;
+
+    public int maxLandings = -1;
+    //public int actualLandings = 0;
+    public Semaphore land;
+
+    public PointExtended landingQueueDecreasePoint;
 
     public ArrayList<TaxiwayPoint> approachTaxiwayPath = new ArrayList<>();
 

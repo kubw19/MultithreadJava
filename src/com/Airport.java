@@ -76,6 +76,10 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.setRunwayStart(new Point(-373,175));
         runway.setAirbornePoint(new Point(595, -249));
 
+        runway.maxLandings = 9;
+        runway.land = new Semaphore(9);
+
+
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-142, 305, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-183, 195, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-198, 163, this));
@@ -113,6 +117,8 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-209, 171, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-154, 300, this));
 
+        runway.landingQueueDecreasePoint = PointExtended.getPoint(315, -84, this);
+
         runway.setM(-0.4389359f);
         runway.setC(11.47158f);
 
@@ -129,6 +135,9 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.setM(0.2425532f);
         runway.setC(13.44681f);
 
+        runway.maxLandings = 1;
+        runway.land = new Semaphore(1);
+
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-359, -124, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-210, -84, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-213, -58, this));
@@ -136,6 +145,8 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-261, 186, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-209, 171, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-154, 300, this));
+
+        runway.landingQueueDecreasePoint = PointExtended.getPoint(-209, 171, this);
 
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-142, 305, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-183, 195, this));
@@ -173,6 +184,9 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.setM(-0.4389359f);
         runway.setC(11.47158f);
 
+        runway.maxLandings = 2;
+        runway.land = new Semaphore(2);
+
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-142, 305, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-183, 195, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-136, 180, this));
@@ -201,6 +215,7 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-198, 163, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-209, 171, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-154, 300, this));
+        runway.landingQueueDecreasePoint = PointExtended.getPoint(-209, 171, this);
 
 
         runways.add(runway);
@@ -216,6 +231,9 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.setM(0.2425532f);
         runway.setC(13.44681f);
 
+        runway.maxLandings = 1;
+        runway.land = new Semaphore(1);
+
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(49, 42, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(58, 55, this));//here
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(5, 78, this));
@@ -226,6 +244,7 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-209, 171, this));
         runway.addApproachTaxiwayPoint(PointExtended.getPoint(-154, 300, this));
 
+        runway.landingQueueDecreasePoint = PointExtended.getPoint(58, 55, this);
 
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-142, 305, this));
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-183, 195, this));
@@ -242,6 +261,7 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         runway.addDepartureTaxiwayPoint(PointExtended.getPoint(-366, -94, this));
 
         runways.add(runway);
+
 
 
 
@@ -268,14 +288,16 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
 
 
 
-        repaint();
+        Repainter rep = new Repainter();
+        rep.airport = this;
+        rep.start();
     }
 
     public void paint(Graphics graphics){
         graphics.drawImage(background, 0,0, width, height,null);
 
-        for(Airplane airplane : airplanes){
-            airplane.draw(graphics);
+        for(int i = 0;i<airplanes.size();i++){
+            airplanes.get(i).draw(graphics);
         }
 
         graphics.drawString("Do obslugi: " + ileDoObsluzenia, 0,10);
@@ -306,7 +328,6 @@ public class Airport extends JPanel implements KeyListener, MouseListener {
         }
 
         System.out.println(airplanes.get(0).position);
-        repaint();
     }
 
     @Override

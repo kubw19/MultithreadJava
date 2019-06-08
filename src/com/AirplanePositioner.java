@@ -41,7 +41,7 @@ public class AirplanePositioner extends Thread {
         while(!airplane.position.equals(to)) {
             try {sleep(100 / ((long)distance + 1));} catch (InterruptedException e) {e.printStackTrace();}
             Positioner.moveTo(airplane.position, from, to);
-            airplane.airport.repaint();
+           // airplane.airport.repaint();
         }
     }
 
@@ -103,7 +103,7 @@ public class AirplanePositioner extends Thread {
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
             airplane.position.x+=direction;
             airplane.position.y = (int)(airplane.runway.m * airplane.position.x + airplane.runway.c);
-            airplane.airport.repaint();
+            //airplane.airport.repaint();
         }
 
 
@@ -169,6 +169,13 @@ public class AirplanePositioner extends Thread {
         }
 
 
+        if(airplane.state == "approach" && airplane.runway.maxLandings!=-1){
+            try {
+                airplane.runway.land.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         useRunway();
 
 
@@ -183,19 +190,22 @@ public class AirplanePositioner extends Thread {
                     unlockRunways();
                 } else moveTo(new Point(next.point.point));
 
+                if(airplane.runway.maxLandings != -1 && airplane.runway.landingQueueDecreasePoint.point.equals(next.point.point)){
+                    airplane.runway.land.release();
+                    System.out.println("Opuscilem" + airplane.runway.number);
+                }
+
                 prev = next.point;
             }
             prev.unlock(airplane);
         }
 
-
         Airport airport = airplane.airport;
+        try {airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
         airport.airplanes.remove(airplane);
         if(airplane.state == "departure")airport.ileStartuje--;
         else airport.ileLaduje--;
-        try {airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
         airport.ileObsluzonych++;
-        airport.repaint();
         airport.changeToManage.release();
 
 

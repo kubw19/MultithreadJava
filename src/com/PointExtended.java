@@ -4,8 +4,8 @@ import java.awt.*;
 
 public class PointExtended {
 
-    public volatile boolean wybieranie[] = new boolean[500];
-    public volatile int numerek[] = new int[500];
+    public volatile boolean wybieranie[] = new boolean[5000];
+    public volatile int numerek[] = new int[5000];
 
     public Point point;
     public boolean runwayEntry;
