@@ -180,14 +180,16 @@ public class AirplanePositioner extends Thread {
 
 
         if(airplane.state == "approach") {
-            PointExtended prev = null;
+            TaxiwayPoint prev = null;
             for (TaxiwayPoint next : airplane.runway.approachTaxiwayPath) {
                 next.point.lock(airplane);
-                if(prev!=null)prev.unlock(airplane);
+                if(prev!=null && !next.blockRunways)prev.point.unlock(airplane);
                 if (next.blockRunways) {
                     if(airplane.runway.number != "29")lockRunways();
+                    System.out.println("jadymy");
                     moveTo(new Point(next.point.point));
                     unlockRunways();
+                    prev.point.unlock(airplane);
                 } else moveTo(new Point(next.point.point));
 
                 if(airplane.runway.maxLandings != -1 && airplane.runway.landingQueueDecreasePoint.point.equals(next.point.point)){
@@ -195,9 +197,9 @@ public class AirplanePositioner extends Thread {
                     System.out.println("Opuscilem" + airplane.runway.number);
                 }
 
-                prev = next.point;
+                prev = next;
             }
-            prev.unlock(airplane);
+            prev.point.unlock(airplane);
         }
 
         Airport airport = airplane.airport;
