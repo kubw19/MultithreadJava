@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5fc406d0-480a-45be-b842-01019044a66c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/PointExtended.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/Airplane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/Airplane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/AirplanePositioner.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/AirplanePositioner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/Airport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/Airport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/PointExtended.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/PointExtended.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/Runway.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/Runway.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/okecie/com/TaxiwayPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/okecie/com/TaxiwayPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Airplane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Airplane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/AirplanePositioner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/AirplanePositioner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Airport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/PointExtended.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/PointExtended.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Runway.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Runway.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/TaxiwayPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/TaxiwayPoint.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -16,11 +25,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Window.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/Airport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="968">
-              <caret line="44" column="21" lean-forward="true" selection-start-line="44" selection-start-column="21" selection-end-line="44" selection-end-column="21" />
+            <state relative-caret-position="285">
+              <caret line="265" column="81" selection-start-line="265" selection-start-column="81" selection-end-line="265" selection-end-column="81" />
+              <folding>
+                <element signature="method#paint#0;class#Airport#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/PointExtended.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="364">
+              <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
+              <folding>
+                <element signature="method#max#0;class#PointExtended#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/AirplanePositioner.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-18">
+              <caret line="168" column="9" lean-forward="true" selection-start-line="146" selection-start-column="7" selection-end-line="168" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,10 +62,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Airport.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Runway.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2199">
-              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+            <state relative-caret-position="328">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#addApproachTaxiwayPoint#1;class#Runway#0" />
+                <element signature="method#addApproachTaxiwayPoint#2;class#Runway#0" />
+                <element signature="e#1026#1027#0" expanded="true" />
+                <element signature="e#1091#1092#0" expanded="true" />
+                <element signature="method#addDepartureTaxiwayPoint#1;class#Runway#0" />
+                <element signature="method#addDepartureTaxiwayPoint#2;class#Runway#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Airplane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="374">
+              <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -40,23 +94,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/TaxiwayPoint.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="461">
+              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/PointExtended.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
-              <folding>
-                <element signature="e#125#126#0" expanded="true" />
-                <element signature="e#151#152#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,6 +112,22 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>296</find>
+      <find>-366</find>
+      <find>468</find>
+      <find>używa</find>
+      <find>lock</find>
+      <find>-365</find>
+      <find>159</find>
+      <find>149</find>
+      <find>fill</find>
+      <find>-239</find>
+      <find>repaint</find>
+      <find>294</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -83,13 +140,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/Positioner.java" />
+        <option value="$PROJECT_DIR$/src/com/Window.java" />
         <option value="$PROJECT_DIR$/src/com/Runway.java" />
         <option value="$PROJECT_DIR$/src/com/Airplane.java" />
         <option value="$PROJECT_DIR$/src/com/AirplanePositioner.java" />
-        <option value="$PROJECT_DIR$/src/com/Window.java" />
-        <option value="$PROJECT_DIR$/src/com/Airport.java" />
         <option value="$PROJECT_DIR$/src/com/TaxiwayPoint.java" />
         <option value="$PROJECT_DIR$/src/com/PointExtended.java" />
+        <option value="$PROJECT_DIR$/src/com/Airport.java" />
       </list>
     </option>
   </component>
@@ -104,6 +161,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -127,13 +185,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559928387110" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559991123325" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -190,11 +247,12 @@
       <workItem from="1559509266023" duration="143000" />
       <workItem from="1559856523154" duration="2113000" />
       <workItem from="1559925219389" duration="2410000" />
+      <workItem from="1559976185980" duration="12509000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55956000" />
+    <option name="totallyTimeSpent" value="74521000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -209,7 +267,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1076759" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.108742006" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -218,7 +276,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -279,36 +337,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/AirplanePositioner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1481">
-          <caret line="79" column="5" selection-start-line="79" selection-start-column="5" selection-end-line="79" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Runway.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Airplane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="814">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Positioner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -326,17 +354,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Airport.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Airplane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2199">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        <state relative-caret-position="374">
+          <caret line="32" column="35" lean-forward="true" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/TaxiwayPoint.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="461">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Runway.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#addApproachTaxiwayPoint#1;class#Runway#0" />
+            <element signature="method#addApproachTaxiwayPoint#2;class#Runway#0" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+            <element signature="method#addDepartureTaxiwayPoint#1;class#Runway#0" />
+            <element signature="method#addDepartureTaxiwayPoint#2;class#Runway#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/AirplanePositioner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="168" column="9" lean-forward="true" selection-start-line="146" selection-start-column="7" selection-end-line="168" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -345,11 +402,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/PointExtended.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state relative-caret-position="364">
+          <caret line="69" column="54" selection-start-line="69" selection-start-column="54" selection-end-line="69" selection-end-column="54" />
           <folding>
-            <element signature="e#125#126#0" expanded="true" />
-            <element signature="e#151#152#0" expanded="true" />
+            <element signature="method#max#0;class#PointExtended#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Airport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="265" column="81" selection-start-line="265" selection-start-column="81" selection-end-line="265" selection-end-column="81" />
+          <folding>
+            <element signature="method#paint#0;class#Airport#0" />
           </folding>
         </state>
       </provider>

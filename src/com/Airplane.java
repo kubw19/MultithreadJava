@@ -12,8 +12,8 @@ public class Airplane {
     public Airport airport;
     public AirplanePositioner airplanePositioner;
     public Runway runway;
-    private int height = 30;
-    private int width = 30;
+    private int height = 10;
+    private int width = 10;
     public String state;
 
     public boolean active;
@@ -31,7 +31,7 @@ public class Airplane {
             color = Color.RED;
         }
         else if(state == "departure"){
-            this.position = new Point(runway.departureTaxiwayPath.get(0).point);
+            this.position = new Point(runway.departureTaxiwayPath.get(0).point.point);
             color = Color.GREEN;
         }
         this.airport = airport;
@@ -42,7 +42,7 @@ public class Airplane {
     public void draw(Graphics graphics){
         if(!active)return;
         graphics.setColor(this.color);
-        graphics.fillRect(position.x + airport.width / 2 - width / 2, -1 * position.y + airport.height / 2 - height / 2, 20, 20);
+        graphics.fillOval(position.x + airport.width / 2 - width / 2, -1 * position.y + airport.height / 2 - height / 2, width, height);
         graphics.setColor(Color.BLACK);
         //System.out.println(id + position.toString());
 

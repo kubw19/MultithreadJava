@@ -8,7 +8,29 @@ public class AirplanePositioner extends Thread {
     private Airplane airplane;
     private int direction;
 
+    private PointExtended runwayEntry = null;
+
     private Random random;
+
+
+
+    public AirplanePositioner(Airplane airplane){
+        random = new Random();
+        this.airplane = airplane;
+        if(airplane.state == "approach"){
+            direction = (airplane.runway.runwayExit.x - airplane.runway.finalApproach.x);
+            if(direction >= 0)direction = 1;
+            else direction = -1;
+        }
+
+        else if(airplane.state == "departure"){
+            direction = (airplane.runway.airbornePoint.x - airplane.runway.runwayStart.x);
+            if(direction >= 0)direction = 1;
+            else direction = -1;
+        }
+
+
+        }
 
     private void moveTo(Point to){
         Point from = new Point(airplane.position);
@@ -30,24 +52,6 @@ public class AirplanePositioner extends Thread {
         }
         return  maximum;
     }
-
-    public AirplanePositioner(Airplane airplane){
-        random = new Random();
-        this.airplane = airplane;
-        if(airplane.state == "approach"){
-            direction = (airplane.runway.runwayExit.x - airplane.runway.finalApproach.x);
-            if(direction >= 0)direction = 1;
-            else direction = -1;
-        }
-
-        else if(airplane.state == "departure"){
-            direction = (airplane.runway.airbornePoint.x - airplane.runway.runwayStart.x);
-            if(direction >= 0)direction = 1;
-            else direction = -1;
-        }
-
-
-        }
 
     public boolean pathEnd(){
 
@@ -75,11 +79,12 @@ public class AirplanePositioner extends Thread {
                 try {sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
             }
         }
-
-        System.out.println("używa: "+airplane.state + airplane.runway.number);
+        airplane.airport.runwayLocked = true;
+        System.out.println("używa: "+airplane.state + airplane.runway.number + " " + airplane.id);
     }
 
     void unlockRunways(){
+        airplane.airport.runwayLocked = false;
         airplane.airport.numerek[airplane.id] = 0;
     }
 
@@ -89,6 +94,10 @@ public class AirplanePositioner extends Thread {
         if(airplane.runway.number == "11" && airplane.state == "departure"){}
         else lockRunways();
 
+
+        if(runwayEntry!=null)runwayEntry.unlock(airplane);
+
+        System.out.println("lece" + airplane.state + airplane.runway.number + " " + airplane.id);
 
        while(!pathEnd()){
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
@@ -101,7 +110,7 @@ public class AirplanePositioner extends Thread {
 
         if(airplane.state == "approach" && airplane.runway.number == "29"){}
         else unlockRunways();
-
+        System.out.println("polecialem " + airplane.state + airplane.runway.number + " " + airplane.id);
 
     }
 
@@ -119,6 +128,7 @@ public class AirplanePositioner extends Thread {
 
 
 
+        //aktualizacja napisów
         if(airplane.state == "departure") {
             try {airplane.airport.addTakeoff.acquire();} catch (InterruptedException e) {e.printStackTrace();}
             airplane.airport.ileStartuje++;
@@ -134,41 +144,60 @@ public class AirplanePositioner extends Thread {
 
         airplane.active = true;//Rysowanie samolotu
 
+        //kołowanie do startu
         if(airplane.state == "departure") {
+            PointExtended prev = null;
             for (TaxiwayPoint next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())) {
+                if(next.point.runwayEntry)System.out.println(airplane.id + "czeka na "+next.point.point.toString());
+                next.point.lock(airplane);
+
+                if(prev!=null && !prev.runwayEntry)prev.unlock(airplane);
+                else if(prev !=null && prev.runwayEntry){
+                    runwayEntry = prev;
+                }
+
                   if (next.blockRunways) {
                     lockRunways();
-                    moveTo(new Point(next.point));
+                    moveTo(new Point(next.point.point));
                     if(airplane.runway.number != "11")unlockRunways();
-                } else moveTo(new Point(next.point));
+                } else moveTo(new Point(next.point.point));
+
+                prev = next.point;
             }
+            prev.unlock(airplane);
             //try {sleep(random.nextInt(10000));} catch (InterruptedException e) {e.printStackTrace(); }//opóźnienie wjazdu na pas
         }
+
 
         useRunway();
 
 
         if(airplane.state == "approach") {
+            PointExtended prev = null;
             for (TaxiwayPoint next : airplane.runway.approachTaxiwayPath) {
+                next.point.lock(airplane);
+                if(prev!=null)prev.unlock(airplane);
                 if (next.blockRunways) {
                     if(airplane.runway.number != "29")lockRunways();
-                    moveTo(new Point(next.point));
+                    moveTo(new Point(next.point.point));
                     unlockRunways();
-                } else moveTo(new Point(next.point));
+                } else moveTo(new Point(next.point.point));
 
-
+                prev = next.point;
             }
+            prev.unlock(airplane);
         }
 
 
         Airport airport = airplane.airport;
-        airplane.airport.airplanes.remove(airplane);
+        airport.airplanes.remove(airplane);
         if(airplane.state == "departure")airport.ileStartuje--;
         else airport.ileLaduje--;
-        try {airplane.airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
-        airplane.airport.ileObsluzonych++;
-        airplane.airport.changeToManage.release();
+        try {airport.changeToManage.acquire();} catch (InterruptedException e) {e.printStackTrace();}
+        airport.ileObsluzonych++;
         airport.repaint();
+        airport.changeToManage.release();
+
 
     }
 }

@@ -14,32 +14,32 @@ public class Runway {
 
     public ArrayList<TaxiwayPoint> departureTaxiwayPath = new ArrayList<>();
 
-    public void addApproachTaxiwayPoint(Point point){
+    public void addApproachTaxiwayPoint(PointExtended point){
         approachTaxiwayPath.add(new TaxiwayPoint(point));
     }
 
-    public void addApproachTaxiwayPoint(Point point, boolean useRunways){
+    public void addApproachTaxiwayPoint(PointExtended point, boolean useRunways){
         if(useRunways)
             approachTaxiwayPath.add(new TaxiwayPoint(point, true));
         else
             approachTaxiwayPath.add(new TaxiwayPoint(point));
     }
 
-    public void addApproachTaxiwayPoint(Point point, boolean useRunways, boolean blockTaxiway){
+    public void addApproachTaxiwayPoint(PointExtended point, boolean useRunways, boolean blockTaxiway){
             approachTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
     }
 
-    public void addDepartureTaxiwayPoint(Point point){
+    public void addDepartureTaxiwayPoint(PointExtended point){
         departureTaxiwayPath.add(new TaxiwayPoint(point));
     }
 
-    public void addDepartureTaxiwayPoint(Point point, boolean useRunways){
+    public void addDepartureTaxiwayPoint(PointExtended point, boolean useRunways){
         if(useRunways)
             departureTaxiwayPath.add(new TaxiwayPoint(point, true));
         else
             departureTaxiwayPath.add(new TaxiwayPoint(point));
     }
-    public void addDepartureTaxiwayPoint(Point point, boolean useRunways, boolean blockTaxiway){
+    public void addDepartureTaxiwayPoint(PointExtended point, boolean useRunways, boolean blockTaxiway){
         departureTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
     }
 
