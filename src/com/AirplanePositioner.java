@@ -41,7 +41,6 @@ public class AirplanePositioner extends Thread {
         while(!airplane.position.equals(to)) {
             try {sleep(100 / ((long)distance + 1));} catch (InterruptedException e) {e.printStackTrace();}
             Positioner.moveTo(airplane.position, from, to);
-           // airplane.airport.repaint();
         }
     }
 
@@ -103,7 +102,6 @@ public class AirplanePositioner extends Thread {
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
             airplane.position.x+=direction;
             airplane.position.y = (int)(airplane.runway.m * airplane.position.x + airplane.runway.c);
-            //airplane.airport.repaint();
         }
 
 
@@ -148,10 +146,10 @@ public class AirplanePositioner extends Thread {
         if(airplane.state == "departure") {
             PointExtended prev = null;
             for (TaxiwayPoint next : airplane.runway.departureTaxiwayPath.subList(1, airplane.runway.departureTaxiwayPath.size())) {
-                if(next.point.runwayEntry)System.out.println(airplane.id + "czeka na "+next.point.point.toString());
                 next.point.lock(airplane);
 
                 if(prev!=null && !prev.runwayEntry)prev.unlock(airplane);
+                else if(prev!=null && prev.runwayEntry && airplane.runway.number=="33")prev.unlock(airplane);
                 else if(prev !=null && prev.runwayEntry){
                     runwayEntry = prev;
                 }
@@ -165,7 +163,6 @@ public class AirplanePositioner extends Thread {
                 prev = next.point;
             }
             prev.unlock(airplane);
-            //try {sleep(random.nextInt(10000));} catch (InterruptedException e) {e.printStackTrace(); }//opóźnienie wjazdu na pas
         }
 
 
