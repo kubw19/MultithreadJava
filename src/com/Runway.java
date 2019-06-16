@@ -12,7 +12,6 @@ public class Runway {
     public Point airbornePoint;
 
     public int maxLandings = -1;
-    //public int actualLandings = 0;
     public Semaphore land;
 
     public PointExtended landingQueueDecreasePoint;
@@ -32,10 +31,6 @@ public class Runway {
             approachTaxiwayPath.add(new TaxiwayPoint(point));
     }
 
-    public void addApproachTaxiwayPoint(PointExtended point, boolean useRunways, boolean blockTaxiway){
-            approachTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
-    }
-
     public void addDepartureTaxiwayPoint(PointExtended point){
         departureTaxiwayPath.add(new TaxiwayPoint(point));
     }
@@ -45,9 +40,6 @@ public class Runway {
             departureTaxiwayPath.add(new TaxiwayPoint(point, true));
         else
             departureTaxiwayPath.add(new TaxiwayPoint(point));
-    }
-    public void addDepartureTaxiwayPoint(PointExtended point, boolean useRunways, boolean blockTaxiway){
-        departureTaxiwayPath.add(new TaxiwayPoint(point, false, blockTaxiway));
     }
 
     public float m;

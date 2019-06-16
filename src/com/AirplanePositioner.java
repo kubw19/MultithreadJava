@@ -96,7 +96,7 @@ public class AirplanePositioner extends Thread {
 
         if(runwayEntry!=null)runwayEntry.unlock(airplane);
 
-        System.out.println("lece" + airplane.state + airplane.runway.number + " " + airplane.id);
+        System.out.println("lece " + airplane.state + airplane.runway.number + " " + airplane.id);
 
        while(!pathEnd()){
             try {sleep(1);} catch (InterruptedException e) {e.printStackTrace();}
@@ -183,15 +183,14 @@ public class AirplanePositioner extends Thread {
                 if(prev!=null && !next.blockRunways)prev.point.unlock(airplane);
                 if (next.blockRunways) {
                     if(airplane.runway.number != "29")lockRunways();
-                    System.out.println("jadymy");
-                    moveTo(new Point(next.point.point));
+                     moveTo(new Point(next.point.point));
                     unlockRunways();
                     prev.point.unlock(airplane);
                 } else moveTo(new Point(next.point.point));
 
                 if(airplane.runway.maxLandings != -1 && airplane.runway.landingQueueDecreasePoint.point.equals(next.point.point)){
                     airplane.runway.land.release();
-                    System.out.println("Opuscilem" + airplane.runway.number);
+                    System.out.println("Opuscilem " + airplane.runway.number);
                 }
 
                 prev = next;

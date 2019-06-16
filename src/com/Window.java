@@ -61,18 +61,11 @@ public class Window implements ActionListener {
     }
 
     public static void main(String[] args){
-
         Airport airport = new Airport();
         Window window = new Window(airport);
-
-
-
-
     }
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) { }
 }

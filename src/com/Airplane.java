@@ -1,7 +1,6 @@
 package com;
 
 import java.awt.*;
-import java.lang.management.RuntimeMXBean;
 
 public class Airplane {
 
@@ -44,8 +43,6 @@ public class Airplane {
         graphics.setColor(this.color);
         graphics.fillOval(position.x + airport.width / 2 - width / 2, -1 * position.y + airport.height / 2 - height / 2, width, height);
         graphics.setColor(Color.BLACK);
-        //System.out.println(id + position.toString());
-
     }
 
 

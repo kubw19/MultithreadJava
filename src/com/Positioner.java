@@ -27,16 +27,9 @@ public class Positioner {
             nextX = position.x - 1;
         }
 
-
         int nextY = (int)((a*nextX - c) / (b * -1));
-
-        //System.out.println(new Point(nextX, nextY));
         position.x = nextX;
         position.y = nextY;
-        //a = a /(b*-1);
-        //c = c / (b*-1);
-        //System.out.println("y = "+a+"x + " + c + "    " + position);
-       // System.exit(0);
 
     }
 }

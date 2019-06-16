@@ -68,6 +68,9 @@ public class PointExtended {
         airport.points.add(new PointExtended(-239, 159, true));
         airport.points.add(new PointExtended(-366, -94, true));
         airport.points.add(new PointExtended(299, -131, true));
+        airport.points.add(new PointExtended(-369, 202, true));
+        airport.points.add(new PointExtended(482, -128, true));
+
     }
 
 }
