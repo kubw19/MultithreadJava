@@ -149,7 +149,6 @@ public class AirplanePositioner extends Thread {
                 next.point.lock(airplane);
 
                 if(prev!=null && !prev.runwayEntry)prev.unlock(airplane);
-                else if(prev!=null && prev.runwayEntry && airplane.runway.number=="33")prev.unlock(airplane);
                 else if(prev !=null && prev.runwayEntry){
                     runwayEntry = prev;
                 }

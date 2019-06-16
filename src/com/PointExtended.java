@@ -6,7 +6,7 @@ public class PointExtended {
 
     public volatile boolean wybieranie[] = new boolean[5000];
     public volatile int numerek[] = new int[5000];
-
+    public boolean releasePrev;
     public Point point;
     public boolean runwayEntry;
     public PointExtended(int x, int y, boolean runwayEntry){
@@ -63,13 +63,17 @@ public class PointExtended {
 
     public static void fillTaxiwayPoints(Airport airport){
         airport.points.add(new PointExtended(-365, 193, true));
-        airport.points.add(new PointExtended(291, 103, true));
+        airport.points.add(new PointExtended(294, 101, true));
         airport.points.add(new PointExtended(468, -170, true));
         airport.points.add(new PointExtended(-239, 159, true));
         airport.points.add(new PointExtended(-366, -94, true));
         airport.points.add(new PointExtended(299, -131, true));
         airport.points.add(new PointExtended(-369, 202, true));
         airport.points.add(new PointExtended(482, -128, true));
+        airport.points.add(new PointExtended(-250, 162, true));
+        //airport.points.add(new PointExtended(301, 71, true, true));
+        airport.points.add(new PointExtended(233, 93, true));
+
 
     }
 
